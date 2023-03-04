@@ -9,17 +9,24 @@ const Read = () => {
       .get("https://64033a83302b5d671c49f1d7.mockapi.io/practise")
       .then((res) => {
         console.log(res.data);
-        setData(res.data)
-
+        setData(res.data);
       })
       .catch((err) => console.log(err));
   };
-  useEffect(()=>{
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`https://64033a83302b5d671c49f1d7.mockapi.io/practise/${id}`)
+      .then(() => {
+        alert(`Row ${id} deleted`)
+        getData();
+        
+      });
+  };
+  useEffect(() => {
     getData();
-  },[])
+  }, []);
 
-
-  
   return (
     <>
       <h2>All Data</h2>
@@ -29,30 +36,33 @@ const Read = () => {
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
-       
-       {
-        data.map((tabdata)=>{
-            return (
-                <tbody className="table-group-divider">
-          <tr>
-            <th scope="row">{tabdata.id}</th>
-            <td>{tabdata.name}</td>
-            <td>{tabdata.email}</td>
-            <td>
-              <button className="btn-success">Edit</button>
-            </td>
-            <td>
-              <button className="btn-danger">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-            )
-        })
-       }
+
+        {data.map((tabdata) => {
+          return (
+            <tbody className="table-group-divider">
+              <tr>
+                <th scope="row">{tabdata.id}</th>
+                <td>{tabdata.name}</td>
+                <td>{tabdata.email}</td>
+                <td>
+                  <button className="btn-success">Edit</button>
+                </td>
+                <td>
+                  <button
+                    className="btn-danger"
+                    onClick={() => handleDelete(tabdata.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
       </table>
     </>
   );
