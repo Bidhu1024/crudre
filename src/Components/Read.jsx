@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Read = () => {
   const [data, setData] = useState([]);
@@ -13,7 +14,11 @@ const Read = () => {
       })
       .catch((err) => console.log(err));
   };
-
+const localStorageF = (id,name,email)=>{
+localStorage.setItem("id", id)
+localStorage.setItem("name", name)
+localStorage.setItem("email", email)
+}
   const handleDelete = (id) => {
     axios
       .delete(`https://64033a83302b5d671c49f1d7.mockapi.io/practise/${id}`)
@@ -49,7 +54,9 @@ const Read = () => {
                 <td>{tabdata.name}</td>
                 <td>{tabdata.email}</td>
                 <td>
-                  <button className="btn-success">Edit</button>
+                <Link to="/update">
+                  <button className="btn-success" onClick={()=>localStorageF(tabdata.id,tabdata.name,tabdata.email)}>Edit</button>
+                  </Link>
                 </td>
                 <td>
                   <button
