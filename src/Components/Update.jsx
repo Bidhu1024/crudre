@@ -1,18 +1,31 @@
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import  axios  from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Update = () => {
     const [id,setId] = useState(0);
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
-
+const nav = useNavigate()
 
     useEffect(()=>{
         setId(localStorage.getItem("id"))
         setName(localStorage.getItem("name"))
         setEmail(localStorage.getItem("email"))
     },[])
+    const handleUpdate = (e)=>{
+      e.preventDefault()
+      axios.put(`https://64033a83302b5d671c49f1d7.mockapi.io/practise/${id}`,
+      {
+        name:name,
+        email:email,
+      }
+      ).then(()=>{
+        nav('/read')
+      })
+    }
   return (
     <>
         <form>
@@ -58,7 +71,7 @@ const Update = () => {
         <button
           type="submit"
           className="btn btn-primary"
-        //   onClick={}
+         onClick={handleUpdate}
         >
           Update
         </button>
