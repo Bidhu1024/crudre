@@ -25,7 +25,7 @@ const Update = () => {
               type="text"
               className="form-control"
               id="exampleInputPassword1"
-              value={name}
+               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -37,9 +37,9 @@ const Update = () => {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+             value={email}
+           onChange={(e) => setEmail(e.target.value)}
+           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div>
